@@ -51,8 +51,6 @@ app.get('/genre/:id/books', async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
-
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

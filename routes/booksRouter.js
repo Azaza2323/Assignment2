@@ -1,6 +1,8 @@
 const express = require('express');
 const booksRouter = express.Router();
 const { PrismaClient } = require('@prisma/client');
+const nodemailer = require('nodemailer');
+
 
 const prisma = new PrismaClient();
 
@@ -56,7 +58,16 @@ booksRouter.put('/:book_id', async (req, res) => {
 
 booksRouter.post('/create', async (req, res) => {
     try {
+        const mailTransporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
         const { title, publish_year, page_count, price } = req.body;
+
         const result = await prisma.books.create({
             data: {
                 title,
@@ -65,7 +76,26 @@ booksRouter.post('/create', async (req, res) => {
                 price,
             },
         });
-        res.json(result);
+
+        const emailBody = `Book details:\nTitle: ${title}\nPublish Year: ${publish_year}\nPage Count: ${page_count}\nPrice: ${price}`;
+
+        const mailDetails = {
+            from: process.env.EMAIL,
+            to: req.body.to,
+            subject: "Book Created Successfully",
+            text: emailBody
+        };
+
+        mailTransporter.sendMail(mailDetails, (err, data) => {
+            if (err) {
+                console.error("Error sending email:", err);
+            } else {
+                console.log("Email sent successfully");
+            }
+        });
+
+
+        res.json({ message: "Book created successfully", book: result });
     } catch (error) {
         console.error("Error creating book:", error);
         res.status(500).json({ error: "Could not create book" });
