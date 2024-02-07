@@ -20,7 +20,6 @@ model books{
 model genres {
   genre_id   Int         @id @default(autoincrement())
   genre_name String?
-
 }
 datasource db {
   provider = "mysql"
