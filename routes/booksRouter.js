@@ -17,7 +17,7 @@ booksRouter.get("/", async (req, res) => {
 
 booksRouter.get("/:book_id", async (req, res) => {
   try {
-    const book_id = parseInt(req.params.book_id);
+    const book_id = req.params.book_id;
     const book = await prisma.books.findUnique({
       where: { book_id: book_id },
     });
@@ -30,7 +30,7 @@ booksRouter.get("/:book_id", async (req, res) => {
 
 booksRouter.put("/:book_id", async (req, res) => {
   try {
-    const bookId = parseInt(req.params.book_id);
+    const bookId = req.params.book_id;
     const { title, publish_year, page_count, price } = req.body;
 
     if (!title && !publish_year && !page_count && !price) {
@@ -42,7 +42,7 @@ booksRouter.put("/:book_id", async (req, res) => {
 
     const updateData = {};
     if (title) updateData.title = title;
-    if (publish_year) updateData.publish_year = new Date(publish_year);
+    if (publish_year) updateData.publish_year = publish_year;
     if (page_count) updateData.page_count = page_count;
     if (price) updateData.price = price;
 
@@ -72,10 +72,10 @@ booksRouter.post("/create", async (req, res) => {
 
     const result = await prisma.books.create({
       data: {
-        title,
-        publish_year: new Date(publish_year),
-        page_count,
-        price,
+        title: title,
+        publish_year: publish_year,
+        page_count: page_count,
+        price: price,
       },
     });
 
@@ -108,7 +108,7 @@ booksRouter.delete("/:book_id", async (req, res) => {
     const { book_id } = req.params;
     const book = await prisma.books.delete({
       where: {
-        book_id: Number(book_id),
+        book_id: book_id,
       },
     });
     res.json(book);

@@ -16,7 +16,7 @@ genresRouter.get("/", async (req, res) => {
 
 genresRouter.get("/:genre_id", async (req, res) => {
   try {
-    const genre_id = parseInt(req.params.genre_id);
+    const genre_id = req.params.genre_id;
     const genre = await prisma.genres.findUnique({
       where: { genre_id: genre_id },
     });
@@ -47,7 +47,7 @@ genresRouter.delete("/:genre_id", async (req, res) => {
     const { genre_id } = req.params;
     const genre = await prisma.genres.delete({
       where: {
-        genre_id: Number(genre_id),
+        genre_id: genre_id,
       },
     });
     res.json(genre);
