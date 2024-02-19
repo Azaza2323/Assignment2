@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d6de5eb-a585-4d14-9cac-16c0850d44ef" name="Changes" comment="added email notification">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/practice.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/combined.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/authorsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authorsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/booksRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/booksRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/genresRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/genresRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +52,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging alibek",
+    "git-widget-placeholder": "alibek",
     "javascript.nodejs.core.library.configured.version": "18.16.1",
     "javascript.nodejs.core.library.typings.version": "18.16.20",
     "node.js.detected.package.eslint": "true",
@@ -106,7 +93,7 @@
       <workItem from="1707292576929" duration="3033000" />
       <workItem from="1707824935891" duration="24000" />
       <workItem from="1707824975061" duration="486000" />
-      <workItem from="1708363797115" duration="2183000" />
+      <workItem from="1708363797115" duration="2794000" />
     </task>
     <task id="LOCAL-00001" summary="added email notification">
       <option name="closed" value="true" />
