@@ -4,8 +4,11 @@ const winston = require("winston");
 
 const port = process.env.PORT;
 
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+const { version } = require("../../package.json");
+const log = require("./logger");
+
 
 const { combine, timestamp, json } = winston.format;
 const logger = winston.createLogger({
@@ -29,37 +32,46 @@ const logger = winston.createLogger({
 });
 
 const options = {
-  swaggerDefinition: {
+  definition: {
     openapi: "3.0.0",
     info: {
-      title: "Node Js Api Project",
-      version: "1.0.0",
-      description: "API для работы с книгами и авторами",
-      contact: {
-        name: "Ваше имя",
-        email: "ваш email",
-      },
-      license: {
-        name: "Лицензия",
-        url: "ссылка на лицензию",
+      title: 'Rest Api Docs',
+      version
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
+        },
       },
     },
-    servers: [
+    security: [
       {
-        url: `http://localhost:${port}/`,
-        description: "Development server",
-      },
-      {
-        url: "https://production-url.com/",
-        description: "Production server",
-      },
-    ],
+        bearerAuth: [],
+      }
+    ]
   },
-  apis: ["./routes/*.js"],
+  apis: ["./src/routes.js", "./src/schema/*.js"],
 };
 
-const swaggerSpec = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
+const swaggerSpec = swaggerJsdoc(options);
+
+function swaggerDocs(app, port) {
+  // Swagger page
+  app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+  // Docs in JSON format
+  app.get('/docs.json', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+  });
+
+  log.info(`Docs available at http://localhost:${port}/docs`);
+}
+
+module.exports = swaggerDocs;
 
 const authorsRouter = require("./routes/authorsRouter")(logger);
 const genresRouter = require("./routes/genresRouter")(logger);

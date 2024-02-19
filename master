@@ -1,0 +1,72 @@
+[33mcommit 184846ce6c0e6ae1b1ccb375a0d40f4b45822655[m[33m ([m[1;36mHEAD -> [m[1;32malibek[m[33m)[m
+Author: unknown <220740@astanait.edu.kz>
+Date:   Tue Feb 20 01:09:12 2024 +0600
+
+    alibek's commit
+
+[33mcommit 694748b12b52fcd4bffe56b4c6553ce5f269224c[m
+Merge: 74b5abc 885caf3
+Author: unknown <220740@astanait.edu.kz>
+Date:   Tue Feb 20 01:01:32 2024 +0600
+
+    alibek's commit
+
+[33mcommit 885caf316a85deec3245d34c617afbe553ba23fd[m[33m ([m[1;31morigin/azamat[m[33m)[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Sun Feb 18 20:58:37 2024 +0600
+
+    added logging , examples on combined.log
+
+[33mcommit 25c425ce4232eb41e871689028f34932804724a2[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Thu Feb 15 22:02:55 2024 +0600
+
+    trying vercel
+
+[33mcommit 3dd6b293c38cdc37255bf18e96dc73b8f5dfa0a8[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Thu Feb 15 20:56:59 2024 +0600
+
+    switched to mongodb added to the heroku, waiting for front
+
+[33mcommit 74b5abc0b2570210369f864717913f9c91bd9a2c[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Tue Feb 13 17:58:46 2024 +0600
+
+    make it better
+
+[33mcommit 47988dd51489f987bff5616554d58ea4523959c3[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Wed Feb 7 14:44:07 2024 +0600
+
+    added new file
+
+[33mcommit a26897a4affd1d99730a691aebbb9b1c204d0043[m[33m ([m[1;31morigin/yrys[m[33m, [m[1;31morigin/dev[m[33m, [m[1;31morigin/alibek[m[33m)[m
+Author: Jaswtqe <147160605+Jaswtqe@users.noreply.github.com>
+Date:   Wed Feb 7 07:58:51 2024 +0000
+
+    my first commit baby
+
+[33mcommit 0ad2d81edcfaa994036c776530e89502f4fc9ceb[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Wed Feb 7 13:54:11 2024 +0600
+
+    azamat
+
+[33mcommit 8fe9d7a24d81ed4ee6ee9ca0595a2b145f80eb65[m
+Author: azamattt <147086297+Azaza2323@users.noreply.github.com>
+Date:   Thu Feb 1 17:14:17 2024 +0600
+
+    Create README.md
+
+[33mcommit 5c337c5f8b52f155ab81fd408a482b4e2c0121b3[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Thu Feb 1 16:49:25 2024 +0600
+
+    added email notification
+
+[33mcommit 32a0387799d8efb4fc08e9940cba8e6515c094a8[m
+Author: azamattt <sabdenbek.4@gmail.com>
+Date:   Wed Jan 31 17:33:19 2024 +0600
+
+    using mysql and added join left routes
