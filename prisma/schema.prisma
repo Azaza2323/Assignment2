@@ -1,28 +1,31 @@
-
 generator client {
   provider = "prisma-client-js"
-}
-model authors {
-  author_id  Int          @id @default(autoincrement())
-  name       String?
-  surname    String?
-  birthday   DateTime?
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+  output   = "./node_modules/@prisma/client"
+  engineType = "binary"
 }
 
-model books{
-  book_id      Int          @id @default(autoincrement())
+model authors {
+  author_id String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  surname   String?
+  birthday  DateTime?
+}
+
+model books {
+  book_id      String  @id @default(auto()) @map("_id") @db.ObjectId
   title        String?
-  publish_year DateTime?
+  publish_year String?
   page_count   Int?
   price        Float?
 }
 
 model genres {
-  genre_id   Int         @id @default(autoincrement())
+  genre_id   String  @id @default(auto()) @map("_id") @db.ObjectId
   genre_name String?
-
 }
+
 datasource db {
-  provider = "mysql"
-  url      = "mysql://root:123123@localhost:3306/library"
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
