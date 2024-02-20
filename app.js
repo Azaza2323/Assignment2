@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 const winston = require("winston");
-const port = process.env.PORT;
+const port = 3000;
 const { combine, timestamp, json } = winston.format;
+const swaggerUi = require("swagger-ui-express"),
+    swaggerDocument = require("./swagger.json");
+
 const logger = winston.createLogger({
     level: process.env.LOG_LEVEL || 'info',
     format: combine(
@@ -22,16 +25,21 @@ const logger = winston.createLogger({
         }),
     ],
 });
+
 const authorsRouter = require("./routes/authorsRouter")(logger);
 const genresRouter = require("./routes/genresRouter")(logger);
 const booksRouter = require("./routes/booksRouter")(logger);
 app.use(express.json());
+
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/authors", authorsRouter);
 app.use("/genres", genresRouter);
 app.use("/books", booksRouter);
 app.get("/", (req, res) => {
     res.json("Hello Page");
 });
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });

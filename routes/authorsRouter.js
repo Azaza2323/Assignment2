@@ -10,10 +10,11 @@ module.exports = function(logger) {
   authorsRouter.get("/", async (req, res) => {
     try {
       const authors = await prisma.authors.findMany();
-      logger.info("infoMessage", { route: `${req.method} ${req.path}`, ip: req.ip });
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
       res.json(authors);
     } catch (error) {
-      logger.error("Error fetching", { route: `${req.method} ${req.path}`, ip: req.ip });
+      console.log(error)
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
       res.status(500).json({ error: "Could not fetch authors" });
     }
   });
@@ -24,10 +25,11 @@ module.exports = function(logger) {
       const author = await prisma.authors.findUnique({
         where: { author_id: author_id },
       });
-      logger.info("infoMessage", { route: `${req.method} ${req.path}`, ip: req.ip });
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
       res.json(author);
     } catch (error) {
-      logger.error("Error fetching authors", { route: `${req.method} ${req.path}`, ip: req.ip });
+      console.log(error)
+      logger.error("Error fetching authors", { route: `${req.baseUrl} ${req.baseUrl}`, ip: req.ip });
       res.status(500).json({ error: "Could not fetch author" });
     }
   });
@@ -36,7 +38,7 @@ authorsRouter.put("/:author_id", async (req, res) => {
   try {
     const authorId = req.params.author_id;
     const { name, surname, birthday } = req.body;
-    logger.info("infoMessage", { route: `${req.method} ${req.path}`, ip: req.ip });
+    logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     if (!name && !surname && !birthday) {
       return res.status(400).json({
         error:
@@ -55,7 +57,8 @@ authorsRouter.put("/:author_id", async (req, res) => {
 
     res.json(updatedAuthor);
   } catch (error) {
-    logger.error("Error fetching authors", { route: `${req.method} ${req.path}`, ip: req.ip });
+    console.log(error)
+    logger.error("Error fetching authors", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     res.status(500).json({ error: "Could not update author" });
   }
 });
@@ -63,7 +66,7 @@ authorsRouter.put("/:author_id", async (req, res) => {
 authorsRouter.post("/create", async (req, res) => {
   try {
     const { name, surname, birthday } = req.body;
-    logger.info("infoMessage", { route: `${req.method} ${req.path}`, ip: req.ip });
+    logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     const authorData = {
       name,
       surname,
@@ -74,7 +77,8 @@ authorsRouter.post("/create", async (req, res) => {
     });
     res.json(result);
   } catch (error) {
-    logger.error("Error fetching authors", { route: `${req.method} ${req.path}`, ip: req.ip });
+    console.log(error)
+    logger.error("Error fetching authors", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     res.status(500).json({ error: "Could not create author" });
   }
 });
@@ -82,7 +86,7 @@ authorsRouter.post("/create", async (req, res) => {
 authorsRouter.delete("/:author_id", async (req, res) => {
   try {
     const { author_id } = req.params;
-    logger.info("infoMessage", { route: `${req.method} ${req.path}`, ip: req.ip });
+    logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     const author = await prisma.authors.delete({
       where: {
         author_id: author_id,
@@ -90,7 +94,8 @@ authorsRouter.delete("/:author_id", async (req, res) => {
     });
     res.json(author);
   } catch (error) {
-    logger.error('Error message');
+    console.error(error)
+    logger.error("Error fetching authors", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     res.status(500).json({ error: "Could not delete author" });
   }
 });

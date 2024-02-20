@@ -1,5 +1,2 @@
-2024-02-18 07:50:35.309 PM [info] infoMessage - GET /65ce5a617d849996218f1cab - 127.0.0.1
-2024-02-18 07:54:30.099 PM [info] infoMessage - DELETE /65ce5a617d849996218f1cab - 127.0.0.1
-2024-02-18 07:55:08.725 PM [info] infoMessage - POST /create - 127.0.0.1
-2024-02-18 07:55:42.506 PM [info] infoMessage - GET /65d20c3caa8dfd56e9868661 - 127.0.0.1
-2024-02-18 07:56:49.147 PM [info] infoMessage - PUT /65d20c3caa8dfd56e9868661 - 127.0.0.1
+
+2024-02-20 04:43:28.820 PM [info] infoMessage - GET /authors - ::1
