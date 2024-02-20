@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8d6de5eb-a585-4d14-9cac-16c0850d44ef" name="Changes" comment="added email notification" />
+    <list default="true" id="8d6de5eb-a585-4d14-9cac-16c0850d44ef" name="Changes" comment="swagger added">
+      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/practice.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/prettier.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combined.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/swagger.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prisma/schema.prisma" beforeDir="false" afterPath="$PROJECT_DIR$/prisma/schema.prisma" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/authorsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/authorsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/booksRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/booksRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/genresRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/genresRouter.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -40,7 +57,9 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2bOS9YKpXXukaLbkoe4de4MZHE9" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -50,7 +69,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Merging master",
     "javascript.nodejs.core.library.configured.version": "18.18.2",
     "javascript.nodejs.core.library.typings.version": "18.18.14",
     "node.js.detected.package.eslint": "true",
@@ -91,6 +110,7 @@
       <workItem from="1707292576929" duration="3033000" />
       <workItem from="1707824935891" duration="24000" />
       <workItem from="1707824975061" duration="486000" />
+      <workItem from="1708426854160" duration="126000" />
     </task>
     <task id="LOCAL-00001" summary="added email notification">
       <option name="closed" value="true" />

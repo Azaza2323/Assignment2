@@ -1,60 +1,69 @@
-const express = require('express');
+const express = require("express");
 const genresRouter = express.Router();
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
-
-genresRouter.get('/', async (req, res) => {
+module.exports = function(logger) {
+  genresRouter.get("/", async (req, res) => {
     try {
-        const genres = await prisma.genres.findMany();
-        res.json(genres);
+      const genres = await prisma.genres.findMany();
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      res.json(genres);
     } catch (error) {
-        console.error("Error fetching genres:", error);
-        res.status(500).json({ error: "Could not fetch genres" });
+      console.log(error)
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      res.status(500).json({error: "Could not fetch genres"});
     }
-});
+  });
 
-genresRouter.get('/:genre_id', async (req, res) => {
+  genresRouter.get("/:genre_id", async (req, res) => {
     try {
-        const genre_id = parseInt(req.params.genre_id);
-        const genre = await prisma.genres.findUnique({
-            where: { genre_id: genre_id },
-        });
-        res.json(genre);
+      const genre_id = req.params.genre_id;
+      const genre = await prisma.genres.findUnique({
+        where: {genre_id: genre_id},
+      });
+      res.json(genre);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
     } catch (error) {
-        console.error("Error fetching genre:", error);
-        res.status(500).json({ error: "Could not fetch genre" });
+      console.log(error)
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      res.status(500).json({error: "Could not fetch genre"});
     }
-});
+  });
 
-genresRouter.post('/create', async (req, res) => {
+  genresRouter.post("/create", async (req, res) => {
     try {
-        const { genre_name } = req.body;
-        const result = await prisma.genres.create({
-            data: {
-                genre_name,
-            },
-        });
-        res.json(result);
+      const {genre_name} = req.body;
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      const result = await prisma.genres.create({
+        data: {
+          genre_name,
+        },
+      });
+      res.json(result);
     } catch (error) {
-        console.error("Error creating genre:", error);
-        res.status(500).json({ error: "Could not create genre" });
+      console.log(error)
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      res.status(500).json({error: "Could not create genre"});
     }
-});
+  });
 
-genresRouter.delete('/:genre_id', async (req, res) => {
+  genresRouter.delete("/:genre_id", async (req, res) => {
     try {
-        const { genre_id } = req.params;
-        const genre = await prisma.genres.delete({
-            where: {
-                genre_id: Number(genre_id),
-            },
-        });
-        res.json(genre);
+      const {genre_id} = req.params;
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      const genre = await prisma.genres.delete({
+        where: {
+          genre_id: genre_id,
+        },
+      });
+      res.json(genre);
     } catch (error) {
-        console.error("Error deleting genre:", error);
-        res.status(500).json({ error: "Could not delete genre" });
+      console.log(error)
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      res.status(500).json({error: "Could not delete genre"});
     }
-});
+  });
 
-module.exports = genresRouter;
+  return  genresRouter;
+}
