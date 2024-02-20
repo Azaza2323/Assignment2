@@ -1,2 +1,7 @@
-
-2024-02-20 04:43:28.820 PM [info] infoMessage - GET /authors - ::1
+2024-02-20 10:14:49.394 PM [info] infoMessage - GET /authors / - ::1
+2024-02-20 10:15:10.911 PM [info] infoMessage - GET /authors /65ce5a617d849996218f1cba - ::1
+2024-02-20 10:16:06.880 PM [info] infoMessage - POST /authors /create - ::1
+2024-02-20 10:16:45.754 PM [info] infoMessage - GET /genres / - ::1
+2024-02-20 10:17:04.551 PM [info] infoMessage - GET /genres /65cd19756d93fd31a7ddc091 - ::1
+2024-02-20 10:17:27.853 PM [info] infoMessage - GET /books / - ::1
+2024-02-20 10:18:38.294 PM [info] infoMessage - DELETE /books /65cd19506d93fd31a7ddbab3 - ::1

@@ -2,16 +2,19 @@ const express = require("express");
 const booksRouter = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const nodemailer = require("nodemailer");
-
+const {saveLog}=require("../scylla.js")
 const prisma = new PrismaClient();
 module.exports = function(logger) {
   booksRouter.get("/", async (req, res) => {
     try {
       const books = await prisma.books.findMany();
-      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'info','infoMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.json(books);
     } catch (error) {
-      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      console.log(error)
+      await saveLog(req.ip,'error','errorMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.status(500).json({error: "Could not fetch books"});
     }
   });
@@ -19,14 +22,16 @@ module.exports = function(logger) {
   booksRouter.get("/:book_id", async (req, res) => {
     try {
       const book_id = req.params.book_id;
-      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'info','infoMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       const book = await prisma.books.findUnique({
         where: {book_id: book_id},
       });
       res.json(book);
     } catch (error) {
       console.log(error)
-      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'error','errorMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.status(500).json({error: "Could not fetch book"});
     }
   });
@@ -34,7 +39,8 @@ module.exports = function(logger) {
   booksRouter.put("/:book_id", async (req, res) => {
     try {
       const bookId = req.params.book_id;
-      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'info','infoMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       const {title, publish_year, page_count, price} = req.body;
 
       if (!title && !publish_year && !page_count && !price) {
@@ -58,7 +64,8 @@ module.exports = function(logger) {
       res.json(updatedBook);
     } catch (error) {
       console.log(error)
-      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'error','errorMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.status(500).json({error: "Could not update book"});
     }
   });
@@ -74,7 +81,8 @@ module.exports = function(logger) {
       });
 
       const {title, publish_year, page_count, price} = req.body;
-      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'info','infoMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       const result = await prisma.books.create({
         data: {
           title: title,
@@ -104,7 +112,8 @@ module.exports = function(logger) {
       res.json({message: "Book created successfully", book: result});
     } catch (error) {
       console.log(error)
-      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'error','errorMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.status(500).json({error: "Could not create book"});
     }
   });
@@ -112,7 +121,8 @@ module.exports = function(logger) {
   booksRouter.delete("/:book_id", async (req, res) => {
     try {
       const {book_id} = req.params;
-      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'info','infoMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.info("infoMessage", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       const book = await prisma.books.delete({
         where: {
           book_id: book_id,
@@ -121,7 +131,8 @@ module.exports = function(logger) {
       res.json(book);
     } catch (error) {
       console.log(error)
-      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl}`, ip: req.ip });
+      await saveLog(req.ip,'error','errorMessage',`${req.method} ${req.baseUrl} ${req.path}`);
+      logger.error("Error fetching", { route: `${req.method} ${req.baseUrl} ${req.path}`, ip: req.ip });
       res.status(500).json({error: "Could not delete book"});
     }
   });
