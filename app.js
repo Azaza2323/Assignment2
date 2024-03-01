@@ -1,56 +1,45 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+const winston = require("winston");
 const port = 3000;
-const { PrismaClient } = require('@prisma/client');
+const { combine, timestamp, json } = winston.format;
+const swaggerUi = require("swagger-ui-express"),
+    swaggerDocument = require("./swagger.json");
 
-const prisma = new PrismaClient();
+const logger = winston.createLogger({
+    level: process.env.LOG_LEVEL || 'info',
+    format: combine(
+        timestamp({
+            format: 'YYYY-MM-DD hh:mm:ss.SSS A',
+        }),
+        json(),
+        winston.format.simple(),
+        winston.format.printf(info => {
+            const ip = info.ip.startsWith('::ffff:') ? info.ip.slice(7) : info.ip;
+            return `${info.timestamp} [${info.level}] ${info.message} - ${info.route} - ${ip}`;
+        })
+    ),
+    transports: [
+        new winston.transports.File({
+            filename: 'combined.log',
+        }),
+    ],
+});
 
-const authorsRouter = require("./routes/authorsRouter");
-const genresRouter = require('./routes/genresRouter');
-const booksRouter = require('./routes/booksRouter');
+const authorsRouter = require("./routes/authorsRouter")(logger);
+const genresRouter = require("./routes/genresRouter")(logger);
+const booksRouter = require("./routes/booksRouter")(logger);
 app.use(express.json());
 
-app.use('/authors', authorsRouter);
-app.use('/genres', genresRouter);
-app.use('/books', booksRouter);
 
-app.get('/author/:id/books', async (req, res) => {
-    const authorId = parseInt(req.params.id);
-
-    try {
-        const authorBooks = await prisma.$queryRaw`
-      SELECT books.*, authors.*
-      FROM books
-      LEFT JOIN author_book ON books.book_id = author_book.book_id
-      LEFT JOIN authors ON author_book.author_id = authors.author_id
-      WHERE author_book.author_id = ${authorId};
-    `;
-
-        res.json(authorBooks);
-    } catch (error) {
-        console.error('Error fetching books by author:', error);
-        res.status(500).send('Internal Server Error');
-    }
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/authors", authorsRouter);
+app.use("/genres", genresRouter);
+app.use("/books", booksRouter);
+app.get("/", (req, res) => {
+    res.json("Hello Page");
 });
 
-app.get('/genre/:id/books', async (req, res) => {
-    const genreId = parseInt(req.params.id);
-
-    try {
-        const genreBooks = await prisma.$queryRaw`
-      SELECT books.*, genres.*
-      FROM books
-      LEFT JOIN book_genre ON books.book_id = book_genre.book_id
-      LEFT JOIN genres ON book_genre.genre_id = genres.genre_id
-      WHERE book_genre.genre_id = ${genreId};
-    `;
-
-        res.json(genreBooks);
-    } catch (error) {
-        console.error('Error fetching books by genre:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
